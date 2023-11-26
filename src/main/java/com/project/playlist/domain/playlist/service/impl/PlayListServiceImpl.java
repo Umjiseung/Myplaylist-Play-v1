@@ -73,9 +73,8 @@ public class PlayListServiceImpl implements PlayListService {
 
     @Override
     @Transactional(readOnly = true)
-    public PlayListInfoResponse playListGet(Long id) {
-        PlayList playList = playListRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("id에 해당하는 PlayList를 찾지 못 했습니다"));
+    public PlayListInfoResponse playListGet(Category category, Long id) {
+        PlayList playList = playListRepository.findByCategoryAndId(category, id);
         return new PlayListInfoResponse(
                 playList.getId(),
                 playList.getStudentId(),
